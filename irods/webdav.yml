@@ -170,6 +170,11 @@
       package:
         name: mod_ssl
 
+    - name: ensure mod_ssl is never updated by yum in order to avoid recreate /etc/httpd/conf.d/ssl.conf
+      lineinfile:
+        name: /etc/yum.conf
+        line: exclude=mod_ssl
+
     - name: ensure ssl.conf is gone
       file:
         path: /etc/httpd/conf.d/ssl.conf
